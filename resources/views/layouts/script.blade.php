@@ -64,5 +64,6 @@
     });
 </script>
 
+
 @stack('alert-logout')
 @stack('webcam-capture')

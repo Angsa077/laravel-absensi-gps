@@ -17,7 +17,7 @@ class Absensi extends Model
         'lokasi_masuk',
         'lokasi_keluar',
     ];
-    
+
     /**
      * Method user
      *
@@ -27,43 +27,24 @@ class Absensi extends Model
     {
         return $this->belongsTo(User::class);
     }
-    
 
     /**
-     * Method foto_masuk
+     * Method getJamInAttribute
      *
-     * @return Attribute
+     * @return void
      */
-    protected function foto_masuk(): Attribute
+    public function getJamInAttribute()
     {
-        return Attribute::make(
-            get: fn ($value) => asset('/storage/foto_masuk/' . $value),
-        );
+        return $this->created_at ? Carbon::parse($this->created_at)->format('H:i:s') : '';
     }
-    
 
     /**
-     * Method foto_keluar
+     * Method getJamOutAttribute
      *
-     * @return Attribute
+     * @return void
      */
-    protected function foto_keluar(): Attribute
+    public function getJamOutAttribute()
     {
-        return Attribute::make(
-            get: fn ($value) => asset('/storage/foto_keluar/' . $value),
-        );
-    }
-    
-    
-    /**
-     * Method createdAt
-     *
-     * @return Attribute
-     */
-    protected function createdAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d-M-Y H:i:s'),
-        );
+        return ($this->created_at == $this->updated_at) ? '' : Carbon::parse($this->updated_at)->format('H:i:s');
     }
 }

@@ -12,7 +12,7 @@ class AbsensiController extends Controller
 {
     public function create()
     {
-        $tgl_absensi = date("Y-m-d");
+        $tgl_absensi = date('Y-m-d');
         $user_id = Auth::user()->id;
         $cek = DB::table('absensis')->whereDate('created_at', $tgl_absensi)->where('user_id', $user_id)->count();
         return view('absensi.create', compact('cek'));
@@ -22,7 +22,7 @@ class AbsensiController extends Controller
     {
         $user_id = Auth::user()->id;
         $user_name = Auth::user()->nip;
-        $tgl_absensi = date("Y-m-d");
+        $tgl_absensi = date('Y-m-d');
         $lokasi = $request->lokasi;
 
         // lokasi kantor contoh dari maps yang error ke jakarta PT Transportasi Jakarta Rawa Buaya
@@ -43,12 +43,12 @@ class AbsensiController extends Controller
         $image = $request->image;
         $folderPathMasuk = "public/uploads/absensi/foto_masuk/";
         $folderPathKeluar = "public/uploads/absensi/foto_keluar/";
-        $formatName = $user_name . "-" . $tgl_absensi;
         $image_parts = explode(";base64", $image);
         $image_base64 = base64_decode($image_parts[1]);
-        $fileName = $formatName . ".png";
-        $fileMasuk = $folderPathMasuk . $fileName;
-        $fileKeluar = $folderPathKeluar . $fileName;
+        $fileNameMasuk = $user_name . "-" . $tgl_absensi . "-masuk"  . ".png";
+        $fileNameKeluar = $user_name . "-" . $tgl_absensi . "-keluar"  . ".png";
+        $fileMasuk = $folderPathMasuk . $fileNameMasuk;
+        $fileKeluar = $folderPathKeluar . $fileNameKeluar;
         $cek = DB::table('absensis')->whereDate('created_at', $tgl_absensi)->where('user_id', $user_id)->count();
 
         if ($radius > 10) {
@@ -57,7 +57,7 @@ class AbsensiController extends Controller
             if ($cek > 0) {
                 $absensi = Absensi::whereDate('created_at', $tgl_absensi)->where('user_id', $user_id)->first();
                 $simpan = $absensi->update([
-                    'foto_keluar' => $fileName,
+                    'foto_keluar' => $fileNameKeluar,
                     'lokasi_keluar' => $lokasi,
                 ]);
     
@@ -70,7 +70,7 @@ class AbsensiController extends Controller
             } else {
                 $absensi = new Absensi([
                     'user_id' => $user_id,
-                    'foto_masuk' => $fileName,
+                    'foto_masuk' => $fileNameMasuk,
                     'lokasi_masuk' => $lokasi,
                 ]);
                 $simpan = $absensi->save();
