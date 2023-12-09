@@ -12,4 +12,5 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/absensi/create', [AbsensiController::class, 'create']);
+    Route::post('/absensi', [AbsensiController::class, 'store']);
 });

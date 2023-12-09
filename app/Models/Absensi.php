@@ -14,7 +14,8 @@ class Absensi extends Model
         'user_id',
         'foto_masuk',
         'foto_keluar',
-        'lokasi',
+        'lokasi_masuk',
+        'lokasi_keluar',
     ];
     
     /**

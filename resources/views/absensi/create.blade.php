@@ -1,6 +1,5 @@
 @extends('layouts.app', ['title' => 'Camera - E-Absensi'])
 
-
 @section('header')
     <div class="appHeader bg-primary text-light">
         <div class="left">
@@ -14,19 +13,13 @@
 
     <style>
         .webcam-capture,
-        .webcam-capture video {
-            display: block;
-            border-radius: 30px !important;
-            margin: 0 auto;
-            max-width: 100%;
-        }
-
+        .webcam-capture video,
         #map {
             height: 485px;
+            width: 100%;
+            max-width: 600px;
             display: block;
-            border-radius: 30px !important;
-            margin: 0 auto;
-            max-width: 80%;
+            margin: 20px auto;
         }
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -34,18 +27,24 @@
 @endsection
 
 @section('content')
-    <div class="row" style="margin-top: 70px; margin-bottom: 20px; text-align: center">
+    <div class="row" style="margin-top: 70px; text-align: center">
         <div class="col-md-12">
-            <button id="takeabsen" class="btn btn-primary rounded">
-                <ion-icon name="camera-outline"></ion-icon> Absen Masuk
-            </button>
+            @if ($cek > 0)
+                <button id="takeabsen" class="btn btn-danger rounded">
+                    <ion-icon name="camera-outline"></ion-icon> Absen Pulang
+                </button>
+            @else
+                <button id="takeabsen" class="btn btn-primary rounded">
+                    <ion-icon name="camera-outline"></ion-icon> Absen Masuk
+                </button>
+            @endif
         </div>
-    </div>
-    <div class="row">
+
         <div class="col-md-6">
             <input type="hidden" id="lokasi">
             <div class="webcam-capture"></div>
         </div>
+
         <div class="col-md-6">
             <div id="map"></div>
         </div>
@@ -88,5 +87,39 @@
         function errorCallback() {
 
         }
+
+        $("#takeabsen").click(function(e) {
+            Webcam.snap(function(uri) {
+                image = uri;
+            });
+            var lokasi = $("#lokasi").val();
+            $.ajax({
+                type: 'POST',
+                url: '/absensi',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    image: image,
+                    lokasi: lokasi
+                },
+                cache: false,
+                success: function(response) {
+                    var status = response.split("|");
+                    if (status[0] == "success") {
+                        Swal.fire({
+                            title: "Berhasil!",
+                            text: status[1],
+                            icon: "success",
+                        })
+                        setTimeout("location.href='/'", 3000);
+                    } else {
+                        Swal.fire({
+                            title: "Failed!",
+                            text: status[1],
+                            icon: "error",
+                        })
+                    }
+                }
+            })
+        });
     </script>
 @endpush
