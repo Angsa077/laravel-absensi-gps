@@ -57,6 +57,10 @@
     <audio id="notifikasi_out">
         <source src="{{ asset('assets/sound/notifikasi_out.mp3') }}" type="audio/mpeg">
     </audio>
+
+    <audio id="radius_sound">
+        <source src="{{ asset('assets/sound/radius_sound.mp3') }}" type="audio/mpeg">
+    </audio>
 @endsection
 
 @push('webcam-capture')
@@ -64,6 +68,7 @@
 
         var notifikasi_in = document.getElementById('notifikasi_in');
         var notifikasi_out = document.getElementById('notifikasi_out');
+        var radius_sound = document.getElementById('radius_sound');
         Webcam.set({
             height: 480,
             width: 640,
@@ -87,6 +92,7 @@
             }).addTo(map);
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
             // radius kantor nanti dirubah sesuai titik coord kantor
+            //  var circle = L.circle([-6.159423188334594, 106.72437925975636], {
             var circle = L.circle([position.coords.latitude, position.coords.longitude], {
                 color: 'red',
                 fillColor: '#f03',
@@ -128,6 +134,9 @@
                         })
                         setTimeout("location.href='/'", 3000);
                     } else {
+                        if (status[2] == "radius") {
+                            radius_sound.play();
+                        }
                         Swal.fire({
                             title: "Failed!",
                             text: status[1],

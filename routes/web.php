@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 // Middleware "auth"
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/absensi/create', [AbsensiController::class, 'create']);
-    Route::post('/absensi', [AbsensiController::class, 'store']);
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/absensi/create', [AbsensiController::class, 'create'])->name('absensi.create');
+    Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
 });
