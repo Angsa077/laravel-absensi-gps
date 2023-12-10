@@ -89,7 +89,7 @@
                                             @php
                                                 $path = Storage::url('uploads/absensi/foto_masuk/' . $absensiHariIni->foto_masuk);
                                             @endphp
-                                            <img src="{{ url($path) }}" alt="foto_masuk" class="imaged w64">
+                                            <img src="{{ url($path) }}" alt="foto_masuk" class="imaged w48">
                                         @else
                                             <ion-icon name="camera"></ion-icon>
                                         @endif
@@ -111,7 +111,7 @@
                                             @php
                                                 $path = Storage::url('uploads/absensi/foto_keluar/' . $absensiHariIni->foto_keluar);
                                             @endphp
-                                            <img src="{{ url($path) }}" alt="foto_keluar" class="imaged w64">
+                                            <img src="{{ url($path) }}" alt="foto_keluar" class="imaged w48">
                                         @else
                                             <ion-icon name="camera"></ion-icon>
                                         @endif
@@ -121,6 +121,62 @@
                                         <span>{{ $absensiHariIni ? $absensiHariIni->jam_out : 'Belum Absen' }}</span>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rekapabsensi">
+                <h3>Rekap Absensi Bulan {{ $namaBulan[$bulanIni] }} Tahun {{ $tahunIni }}</h3>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
+                                <span class="badge badge-success"
+                                    style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">
+                                    {{ $rekabAbsensi->jmlHadir }}</span>
+                                <ion-icon name="accessibility-outline" style="font-size: 1.6rem"
+                                    class="text-primary mb-1"></ion-icon>
+                                <br>
+                                <span style="font-size: 0.8rem; font-weight:500">Hadir</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
+                                <span class="badge badge-warning"
+                                    style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">0</span>
+                                <ion-icon name="newspaper-outline" style="font-size: 1.6rem"
+                                    class="text-primary mb-1"></ion-icon>
+                                <br>
+                                <span style="font-size: 0.8rem; font-weight:500">Izin</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
+                                <span class="badge badge-warning"
+                                    style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">0</span>
+                                <ion-icon name="medkit-outline" style="font-size: 1.6rem"
+                                    class="text-primary mb-1"></ion-icon>
+                                <br>
+                                <span style="font-size: 0.8rem; font-weight:500">Sakit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
+                                <span class="badge badge-danger"
+                                    style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">
+                                    {{ $rekabAbsensi->jmlTerlambat }}</span>
+                                <ion-icon name="alarm-outline" style="font-size: 1.6rem"
+                                    class="text-primary mb-1"></ion-icon>
+                                <br>
+                                <span style="font-size: 0.8rem; font-weight:500">Telat</span>
                             </div>
                         </div>
                     </div>
@@ -146,70 +202,41 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel">
                         <ul class="listview image-listview">
                             @foreach ($historiBulanIni as $item)
-                            <li>
-                                <div class="item">
-                                    <div class="icon-box bg-primary">
-                                        <ion-icon name="today-outline"></ion-icon>
+                                <li>
+                                    <div class="item">
+                                        <div class="icon-box bg-primary">
+                                            <ion-icon name="today-outline"></ion-icon>
+                                        </div>
+                                        <div class="in">
+                                            <div>{{ date('d-m-Y', strtotime($item->created_at)) }}</div>
+                                            <span class="badge badge-success">{{ $item->jam_in }}</span>
+                                            <span
+                                                class="badge badge-danger">{{ $absensiHariIni != null && $item->jam_out != null ? $item->jam_out : 'Belum Absen' }}</span>
+                                        </div>
                                     </div>
-                                    <div class="in">
-                                        <div>{{ date("d-m-Y", strtotime($item->created_at)) }}</div>
-                                        <span class="badge badge-success">{{ $item->jam_in }}</span>
-                                        <span class="badge badge-danger">{{ $absensiHariIni != null && $item->jam_out != null ? $item->jam_out : 'Belum Absen' }}</span>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel">
                         <ul class="listview image-listview">
+                            @foreach ( $leaderboard as $item)
                             <li>
                                 <div class="item">
                                     <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="image"
                                         class="image">
                                     <div class="in">
-                                        <div>Edward Lindgren</div>
-                                        <span class="text-muted">Designer</span>
+                                        <div>
+                                            <b>{{ $item->name }}</b>
+                                            <small class="text-muted">{{ $item->email }}</small>
+                                        </div>
+                                        <span class="badge {{ $item->jam_in < "07:00" ? 'badge-success' : 'badge-danger' }}">
+                                            {{ $item->jam_in }}
+                                        </span>
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="item">
-                                    <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="image"
-                                        class="image">
-                                    <div class="in">
-                                        <div>Emelda Scandroot</div>
-                                        <span class="badge badge-primary">3</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="image"
-                                        class="image">
-                                    <div class="in">
-                                        <div>Henry Bove</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="image"
-                                        class="image">
-                                    <div class="in">
-                                        <div>Henry Bove</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="image"
-                                        class="image">
-                                    <div class="in">
-                                        <div>Henry Bove</div>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
 
