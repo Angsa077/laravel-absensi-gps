@@ -5,7 +5,14 @@
         <div class="section" id="user-section">
             <div id="user-detail">
                 <div class="avatar">
-                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
+                    @if (!empty(Auth::user()->profile_photo_path))
+                        @php
+                            $path = Storage::url('uploads/profile/' . Auth::user()->profile_photo_path);
+                        @endphp
+                        <img src="{{ url($path) }}" alt="avatar" class="imaged" style="width: 54px; height:54px;">
+                    @else
+                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged" style="width: 54px; height:54px;">
+                    @endif
                 </div>
                 <div id="user-info">
                     <h2 id="user-name">{{ Auth::user()->name }}</h2>
@@ -220,22 +227,23 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel">
                         <ul class="listview image-listview">
-                            @foreach ( $leaderboard as $item)
-                            <li>
-                                <div class="item">
-                                    <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="image"
-                                        class="image">
-                                    <div class="in">
-                                        <div>
-                                            <b>{{ $item->name }}</b>
-                                            <small class="text-muted">{{ $item->email }}</small>
+                            @foreach ($leaderboard as $item)
+                                <li>
+                                    <div class="item">
+                                        <img src="{{ asset('assets/img/sample/avatar/avatar1.jpg') }}" alt="image"
+                                            class="image">
+                                        <div class="in">
+                                            <div>
+                                                <b>{{ $item->name }}</b>
+                                                <small class="text-muted">{{ $item->email }}</small>
+                                            </div>
+                                            <span
+                                                class="badge {{ $item->jam_in < '07:00' ? 'badge-success' : 'badge-danger' }}">
+                                                {{ $item->jam_in }}
+                                            </span>
                                         </div>
-                                        <span class="badge {{ $item->jam_in < "07:00" ? 'badge-success' : 'badge-danger' }}">
-                                            {{ $item->jam_in }}
-                                        </span>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
                             @endforeach
                         </ul>
                     </div>

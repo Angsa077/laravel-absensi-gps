@@ -85,6 +85,7 @@ class AbsensiController extends Controller
         }
     }
 
+    // Menghitung jarak kantor dan user
     function distance($lat1, $lon1, $lat2, $lon2)
     {
         $theta = $lon1 - $lon2;

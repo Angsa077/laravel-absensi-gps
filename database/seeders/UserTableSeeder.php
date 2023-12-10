@@ -22,6 +22,9 @@ class UserTableSeeder extends Seeder
             'email'     => 'admin@gmail.com',
             'nip'      => '123456789',
             'nik'      => '1234567891234567',
+            'no_hp'      => '087741001100',
+            'tgl_lahir'      => '2000-01-01',
+            'alamat'      => 'Serang',
             'password'  => bcrypt('admin123'),
         ]);
 

@@ -1,6 +1,6 @@
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
-        <a href="/" class="item {{ request()->is('/') ? 'active' : '' }}">
+        <a href="{{ route('dashboard') }}" class="item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
             <div class="col">
                 <ion-icon name="home-outline"  role="img" class="md hydrated"
                     aria-label="home outline"></ion-icon>
@@ -14,7 +14,7 @@
                 <strong>Calendar</strong>
             </div>
         </a>
-        <a href="/absensi/create" class="item">
+        <a href="{{ route('absensi.create') }}" class="item">
             <div class="col">
                 <div class="action-button large">
                     <ion-icon name="camera" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
@@ -28,7 +28,7 @@
                 <strong>Docs</strong>
             </div>
         </a>
-        <a href="javascript:;" class="item">
+        <a href="{{ route('profile.index') }}" class="item {{ request()->routeIs('profile.index') ? 'active' : '' }}">
             <div class="col">
                 <ion-icon name="people-outline" role="img" class="md hydrated"
                     aria-label="people outline"></ion-icon>
