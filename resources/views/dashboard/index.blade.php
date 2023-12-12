@@ -11,7 +11,8 @@
                         @endphp
                         <img src="{{ url($path) }}" alt="avatar" class="imaged" style="width: 54px; height:54px;">
                     @else
-                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged" style="width: 54px; height:54px;">
+                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged"
+                            style="width: 54px; height:54px;">
                     @endif
                 </div>
                 <div id="user-info">
@@ -27,7 +28,17 @@
                     <div class="list-menu">
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="" class="green" style="font-size: 40px;">
+                                <a href="{{ route('admin.index') }}" class="orange" style="font-size: 32px;">
+                                    <ion-icon name="server-outline"></ion-icon>
+                                </a>
+                            </div>
+                            <div class="menu-name">
+                                Admin
+                            </div>
+                        </div>
+                        <div class="item-menu text-center">
+                            <div class="menu-icon">
+                                <a href="{{ route('profile.index') }}" class="green" style="font-size: 32px;">
                                     <ion-icon name="person-sharp"></ion-icon>
                                 </a>
                             </div>
@@ -37,7 +48,7 @@
                         </div>
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="" class="danger" style="font-size: 40px;">
+                                <a href="{{ route('izin.index') }}" class="danger" style="font-size: 32px;">
                                     <ion-icon name="calendar-number"></ion-icon>
                                 </a>
                             </div>
@@ -47,7 +58,7 @@
                         </div>
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="" class="warning" style="font-size: 40px;">
+                                <a href="{{ route('histori.index') }}" class="warning" style="font-size: 32px;">
                                     <ion-icon name="document-text"></ion-icon>
                                 </a>
                             </div>
@@ -55,20 +66,10 @@
                                 <span class="text-center">Histori</span>
                             </div>
                         </div>
-                        <div class="item-menu text-center">
-                            <div class="menu-icon">
-                                <a href="" class="orange" style="font-size: 40px;">
-                                    <ion-icon name="location"></ion-icon>
-                                </a>
-                            </div>
-                            <div class="menu-name">
-                                Lokasi
-                            </div>
-                        </div>
 
                         <div class="item-menu text-center">
                             <div class="menu-icon">
-                                <a href="#" onclick="confirmLogout(event);" class="primary" style="font-size: 40px;">
+                                <a href="#" onclick="confirmLogout(event);" class="primary" style="font-size: 32px;">
                                     <ion-icon name="log-out-outline"></ion-icon>
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">

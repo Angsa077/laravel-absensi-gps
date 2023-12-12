@@ -2,15 +2,14 @@
     <div class="appBottomMenu">
         <a href="{{ route('dashboard') }}" class="item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
             <div class="col">
-                <ion-icon name="home-outline"  role="img" class="md hydrated"
-                    aria-label="home outline"></ion-icon>
+                <ion-icon name="home-outline" role="img" class="md hydrated" aria-label="home outline"></ion-icon>
                 <strong>Home</strong>
             </div>
         </a>
         <a href="{{ route('histori.index') }}" class="item {{ request()->routeIs('histori.index') ? 'active' : '' }}">
             <div class="col">
-                <ion-icon name="calendar-outline" role="img" class="md hydrated"
-                    aria-label="calendar outline"></ion-icon>
+                <ion-icon name="document-text-outline" role="img" class="md hydrated"
+                    aria-label="document text outline"></ion-icon>
                 <strong>Histori</strong>
             </div>
         </a>
@@ -21,10 +20,11 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('izin.index') }}" class="item {{ request()->routeIs('izin.index')  || request()->routeIs('izin.create') ? 'active' : '' }}">
+        <a href="{{ route('izin.index') }}"
+            class="item {{ request()->routeIs('izin.index') || request()->routeIs('izin.create') ? 'active' : '' }}">
             <div class="col">
-                <ion-icon name="document-text-outline" role="img" class="md hydrated"
-                    aria-label="document text outline"></ion-icon>
+                <ion-icon name="calendar-outline" role="img" class="md hydrated"
+                    aria-label="calendar outline"></ion-icon>
                 <strong>Izin</strong>
             </div>
         </a>

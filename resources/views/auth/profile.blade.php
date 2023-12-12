@@ -15,7 +15,7 @@
 @endsection
 
 @section('content')
-    @php $hideBottomNav = true; @endphp
+    {{-- @php $hideBottomNav = true; @endphp --}}
 
     <div class="row" style="margin-top: 4rem">
         <div class="col">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data" style="margin-bottom: 70px;">
         @csrf
         @method('PUT')
 

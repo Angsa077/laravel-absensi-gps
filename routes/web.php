@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoriController;
 use App\Http\Controllers\IzinController;
@@ -32,4 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/izin', [IzinController::class, 'index'])->name('izin.index');
     Route::get('/izin/create', [IzinController::class, 'create'])->name('izin.create');
     Route::post('/izin', [IzinController::class, 'store'])->name('izin.store');
+
+    // Admin
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 });
