@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoriController;
+use App\Http\Controllers\IzinController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,9 @@ Route::group(['middleware' => ['auth']], function () {
     // Histori
     Route::get('/histori', [HistoriController::class, 'index'])->name('histori.index');
     Route::post('/gethistori', [HistoriController::class, 'gethistori'])->name('absensi.gethistori');
+
+    // Histori
+    Route::get('/izin', [IzinController::class, 'index'])->name('izin.index');
+    Route::get('/izin/create', [IzinController::class, 'create'])->name('izin.create');
+    Route::post('/izin', [IzinController::class, 'store'])->name('izin.store');
 });

@@ -21,11 +21,11 @@
                 </div>
             </div>
         </a>
-        <a href="#" class="item">
+        <a href="{{ route('izin.index') }}" class="item {{ request()->routeIs('izin.index')  || request()->routeIs('izin.create') ? 'active' : '' }}">
             <div class="col">
                 <ion-icon name="document-text-outline" role="img" class="md hydrated"
                     aria-label="document text outline"></ion-icon>
-                <strong>Docs</strong>
+                <strong>Izin</strong>
             </div>
         </a>
         <a href="{{ route('profile.index') }}" class="item {{ request()->routeIs('profile.index') ? 'active' : '' }}">

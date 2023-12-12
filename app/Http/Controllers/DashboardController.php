@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
+use App\Models\Izin;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
@@ -36,8 +37,15 @@ class DashboardController extends Controller
             ->orderBy('absensis.created_at')
             ->get();
 
+        $rekabIzin = Izin::selectRaw('SUM(IF(status="i", 1,0)) as jmlIzin, SUM(IF(status="s",1,0)) as jmlSakit')
+            ->where('user_id', $user_id)
+            ->whereMonth('created_at', $bulanIni)
+            ->whereYear('created_at', $tahunIni)
+            ->where('status_approved', 1)
+            ->first();
+
         $namaBulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
-        return view('dashboard.index', compact('absensiHariIni', 'historiBulanIni', 'namaBulan', 'bulanIni', 'tahunIni', 'rekabAbsensi', 'leaderboard'));
+        return view('dashboard.index', compact('absensiHariIni', 'historiBulanIni', 'namaBulan', 'bulanIni', 'tahunIni', 'rekabAbsensi', 'leaderboard', 'rekabIzin'));
     }
 }

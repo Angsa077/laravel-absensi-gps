@@ -20,6 +20,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 <!-- Sweat Alert CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!-- Date Picker JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
 <script>
     am4core.ready(function() {
@@ -68,3 +70,4 @@
 @stack('alert-logout')
 @stack('webcam-capture')
 @stack('search-histori')
+@stack('date-picker')
