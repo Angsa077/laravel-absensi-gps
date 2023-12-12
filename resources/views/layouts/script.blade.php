@@ -67,3 +67,4 @@
 
 @stack('alert-logout')
 @stack('webcam-capture')
+@stack('search-histori')

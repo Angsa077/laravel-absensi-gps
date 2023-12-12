@@ -7,11 +7,11 @@
                 <strong>Home</strong>
             </div>
         </a>
-        <a href="#" class="item">
+        <a href="{{ route('histori.index') }}" class="item {{ request()->routeIs('histori.index') ? 'active' : '' }}">
             <div class="col">
                 <ion-icon name="calendar-outline" role="img" class="md hydrated"
                     aria-label="calendar outline"></ion-icon>
-                <strong>Calendar</strong>
+                <strong>Histori</strong>
             </div>
         </a>
         <a href="{{ route('absensi.create') }}" class="item">

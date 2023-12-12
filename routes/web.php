@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HistoriController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Histori
+    Route::get('/histori', [HistoriController::class, 'index'])->name('histori.index');
+    Route::post('/gethistori', [HistoriController::class, 'gethistori'])->name('absensi.gethistori');
 });
