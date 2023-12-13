@@ -24,15 +24,13 @@
                         </svg>
                         Source code
                     </a>
-                    <a href="https://github.com/sponsors/codecalm" class="btn" target="_blank"
-                        rel="noreferrer">
+                    <a href="https://github.com/sponsors/codecalm" class="btn" target="_blank" rel="noreferrer">
                         <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink" width="24"
-                            height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                            <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
                         </svg>
                         Sponsor
                     </a>
@@ -43,19 +41,18 @@
                     data-bs-toggle="tooltip" data-bs-placement="bottom">
                     <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+                        <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
                     </svg>
                 </a>
                 <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
                     data-bs-toggle="tooltip" data-bs-placement="bottom">
                     <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
                         <path
@@ -96,10 +93,9 @@
                                         <div class="col-auto">
                                             <a href="#" class="list-group-item-actions">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon text-muted" width="24" height="24"
-                                                    viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
+                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" fill="none"
                                                     stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
@@ -121,10 +117,9 @@
                                         <div class="col-auto">
                                             <a href="#" class="list-group-item-actions show">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon text-yellow" width="24" height="24"
-                                                    viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-yellow"
+                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" fill="none"
                                                     stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
@@ -146,10 +141,9 @@
                                         <div class="col-auto">
                                             <a href="#" class="list-group-item-actions">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon text-muted" width="24" height="24"
-                                                    viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
+                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" fill="none"
                                                     stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
@@ -173,10 +167,9 @@
                                         <div class="col-auto">
                                             <a href="#" class="list-group-item-actions">
                                                 <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon text-muted" width="24" height="24"
-                                                    viewBox="0 0 24 24" stroke-width="2"
-                                                    stroke="currentColor" fill="none"
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted"
+                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" fill="none"
                                                     stroke-linecap="round" stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
@@ -194,8 +187,7 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
-                    <span class="avatar avatar-sm"
-                        style="background-image: url(./static/avatars/000m.jpg)"></span>
+                    <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>Paweł Kuna</div>
                         <div class="mt-1 small text-secondary">UI Designer</div>
@@ -217,9 +209,9 @@
                     <a class="nav-link" href="./">
                         <span
                             class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
                                 <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
@@ -236,9 +228,9 @@
                         data-bs-auto-close="false" role="button" aria-expanded="false">
                         <span
                             class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
                                 <path d="M12 12l8 -4.5" />
@@ -248,14 +240,52 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Interface
+                            Data Master
                         </span>
                     </a>
                     <div class="dropdown-menu">
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="./alerts.html">
-                                    Alerts
+                                <a class="dropdown-item" href="{{ route('karyawan.index') }}">
+                                    Data Karyawan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
+                        data-bs-auto-close="false" role="button" aria-expanded="false">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 
+                                    1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 
+                                    0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 
+                                    0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 
+                                    -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 
+                                    -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                                <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Settings
+                        </span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-menu-columns">
+                            <div class="dropdown-menu-column">
+                                <a class="dropdown-item" href="{{ route('permission.index') }}">
+                                    Permissions
+                                </a>
+                            </div>
+                            <div class="dropdown-menu-column">
+                                <a class="dropdown-item" href="{{ route('role.index') }}">
+                                    Roles
                                 </a>
                             </div>
                         </div>

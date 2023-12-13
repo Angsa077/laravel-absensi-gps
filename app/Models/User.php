@@ -27,6 +27,8 @@ class User extends Authenticatable
         'no_hp',
         'profile_photo_path',
         'password',
+        'alamat',
+        'tgl_lahir'
     ];
 
     /**

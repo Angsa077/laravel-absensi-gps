@@ -5,7 +5,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoriController;
 use App\Http\Controllers\IzinController;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,4 +39,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Admin
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+    // Karyawan
+    Route::resource('/admin/karyawan', KaryawanController::class);
+
+    // Permission
+    Route::get('/admin/permission', PermissionController::class)->name('permission.index');
+
+    // Role
+    Route::resource('admin/role', RoleController::class);
 });

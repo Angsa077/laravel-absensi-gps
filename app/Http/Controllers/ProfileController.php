@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class ProfileController extends Controller
@@ -26,7 +25,6 @@ class ProfileController extends Controller
         ]);
 
         $user = User::find($id);
-        $password = Hash::make($request->password);
 
         if ($request->hasFile('profile_photo_path')) {
             $profile_photo_path = $user->name . "-" . $user->nip . "." . $request->file('profile_photo_path')->getClientOriginalExtension();
@@ -35,7 +33,7 @@ class ProfileController extends Controller
         }
 
 
-        if (empty($password)) {
+        if (empty($request->password)) {
             $data = [
                 'email' => $request->email,
                 'no_hp' => $request->no_hp,
@@ -47,7 +45,7 @@ class ProfileController extends Controller
                 'email' => $request->email,
                 'no_hp' => $request->no_hp,
                 'alamat' => $request->alamat,
-                'password' => $password,
+                'password' => bcrypt($request->password),
                 'profile_photo_path' => $profile_photo_path,
             ];
         }
