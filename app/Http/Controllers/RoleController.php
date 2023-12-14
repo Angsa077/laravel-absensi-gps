@@ -8,14 +8,11 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $roles = Role::when(request()->q, function ($query) {
             $query->where('name', 'like', '%' . request()->q . '%');
-        })->with('permissions')->latest()->paginate(5);
+        })->with('permissions:id,name')->latest()->paginate(5);
 
         return view('admin.role.index', compact('roles'));
     }
@@ -36,7 +33,7 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name'          => 'required',
-            'permissions'   => 'required',
+            'permissions' => 'required|array',
         ]);
 
         $role = Role::create(['name' => $request->name]);
@@ -54,7 +51,7 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        $roles = Role::with('permissions')->findOrFail($id);
+        $roles = Role::with('permissions:id,name')->findOrFail($id);
         $permissions = Permission::all();
         return view('admin.role.edit', compact('roles', 'permissions'));
     }
@@ -85,6 +82,10 @@ class RoleController extends Controller
     {
         $role = Role::findOrFail($id);
         $role->delete();
-        return redirect()->route('role.index');
+        if ($role) {
+            return redirect()->route('role.index')->with(['success' => 'Data Berhasil Dihapus']);
+        } else {
+            return redirect()->route('role.index')->with(['error' => 'Data Gagal Dihapus']);
+        }
     }
 }

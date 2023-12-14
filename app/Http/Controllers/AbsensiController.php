@@ -30,10 +30,14 @@ class AbsensiController extends Controller
         // $longitudeKantor = 106.72437925975636;
 
         // lokasi kantor contoh menyesuaikan lokasi user
-        $latitudeKantor = -6.160384;
-        $longitudeKantor = 106.725376;
+        $lokasiUser = explode(',', $lokasi);
 
-        $lokasiUser = explode(',', $lokasi);  
+        // $latitudeKantor = -6.160384;
+        // $longitudeKantor = 106.725376;
+
+        $latitudeKantor = $lokasiUser[0];
+        $longitudeKantor =  $lokasiUser[1];
+
         $latitudeUser = $lokasiUser[0];
         $longitudeUser = $lokasiUser[1];
 
@@ -51,7 +55,7 @@ class AbsensiController extends Controller
         $fileKeluar = $folderPathKeluar . $fileNameKeluar;
         $cek = DB::table('absensis')->whereDate('created_at', $tgl_absensi)->where('user_id', $user_id)->count();
 
-        if ($radius > 10) {
+        if ($radius > 20) {
             echo "error|Maaf Anda Berada Diluar Radius . Jarak Anda " . $radius . " Meter Dari Kantor!|radius";
         } else {
             if ($cek > 0) {

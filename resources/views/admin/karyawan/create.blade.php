@@ -22,50 +22,66 @@
                             {{-- content --}}
                             <form method="POST" action="{{ route('karyawan.store') }}" id="formKaryawan">
                                 @csrf
+
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 space-y-2">
                                         <div class="form-group">
                                             <label for="name">Nama Lengkap:</label>
                                             <input type="text" name="name" id="name" class="form-control"
-                                                value="{{ old('name') }}" placeholder="Nama Lengkap" required>
+                                                value="{{ old('name') }}" placeholder="Nama Lengkap">
                                         </div>
+
                                         <div class="form-group">
                                             <label for="email">Email:</label>
                                             <input type="email" name="email" id="email" class="form-control"
-                                                value="{{ old('email') }}" placeholder="Email" required>
+                                                value="{{ old('email') }}" placeholder="Email">
+                                            @error('email')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
+
                                         <div class="form-group">
                                             <label for="nip">NIP:</label>
                                             <input type="text" name="nip" id="nip" class="form-control"
-                                                value="{{ old('nip') }}" placeholder="NIP" required>
+                                                value="{{ old('nip') }}" placeholder="NIP">
+                                            @error('nip')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
+
                                         <div class="form-group">
                                             <label for="nik">NIK:</label>
                                             <input type="text" name="nik" id="nik" class="form-control"
-                                                value="{{ old('nik') }}" placeholder="NIK" required>
+                                                value="{{ old('nik') }}" placeholder="NIK">
+                                            @error('nik')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+
+                                    <div class="col-md-6 space-y-2">
                                         <div class="form-group">
                                             <label for="no_hp">No HP:</label>
                                             <input type="text" name="no_hp" id="no_hp" class="form-control"
-                                                value="{{ old('no_hp') }}" placeholder="No HP" required>
+                                                value="{{ old('no_hp') }}" placeholder="No HP">
                                         </div>
+
                                         <div class="form-group">
                                             <label for="tgl_lahir">Tanggal Lahir:</label>
                                             <input type="date" name="tgl_lahir" id="tgl_lahir" class="form-control"
-                                                value="{{ old('tgl_lahir') }}" required>
+                                                value="{{ old('tgl_lahir') }}">
                                         </div>
+
                                         <div class="form-group">
                                             <label for="alamat">Alamat:</label>
-                                            <textarea name="alamat" id="alamat" class="form-control"
-                                                placeholder="Alamat" required>{{ old('alamat') }}</textarea>
+                                            <textarea name="alamat" id="alamat" class="form-control" placeholder="Alamat">{{ old('alamat') }}</textarea>
                                         </div>
+                                        
                                         <div class="form-group">
-                                            <label for="roles">Roles:</label>
-                                            <select name="roles[]" id="roles" class="form-control" multiple required>
+                                            <select name="roles[]" id="roles" class="form-select" multiple>
                                                 @foreach ($roles as $role)
-                                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                                    <option {{ Request('roles[]') == $role->name ? 'selected' : '' }}
+                                                        value="{{ $role->name }}">{{ $role->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -82,34 +98,112 @@
             </div>
         </div>
     </div>
+@endsection
 
+@push('myscript')
     <script>
-        $("#formKaryawan").submit(function(e) {
-            e.preventDefault();
-    
-            var name = $("#name").val();
-            var email = $("#email").val();
-            var nip = $("#nip").val();
-            var nik = $("#nik").val();
-            var no_hp = $("#no_hp").val();
-            var tgl_lahir = $("#tgl_lahir").val();
-            var alamat = $("#alamat").val();
-            var roles = $("#roles").val();
-    
-            // Basic validation - Check if required fields are not empty
-            if (name.trim() === "" || email.trim() === "" || nip.trim() === "" || nik.trim() === "" ||
-                no_hp.trim() === "" || tgl_lahir.trim() === "" || alamat.trim() === "" || roles === null) {
-    
-                Swal.fire({
-                    title: "Oops!",
-                    text: "Please fill in all required fields!",
-                    icon: "error",
-                });
-    
-            } else {
-                // If all required fields are filled, you can submit the form
-                this.submit();
-            }
+        $(function() {
+            $("#formKaryawan").submit(function() {
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var nip = $("#nip").val();
+                var nik = $("#nik").val();
+                var no_hp = $("#no_hp").val();
+                var tgl_lahir = $("#tgl_lahir").val();
+                var alamat = $("#alamat").val();
+                var roles = $("#roles").val();
+
+                if (name == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'Name Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#nik").focus();
+                    });
+                    return false;
+                }
+
+                if (email == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'Email Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#email").focus();
+                    });
+                    return false;
+                }
+
+                if (nip == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'NIP Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#nip").focus();
+                    });
+                    return false;
+                }
+
+                if (nik == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'NIK Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#nik").focus();
+                    });
+                    return false;
+                }
+
+                if (no_hp == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'No HP Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#no_hp").focus();
+                    });
+                    return false;
+                }
+
+                if (tgl_lahir == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'Tgl Lahir Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#tgl_lahir").focus();
+                    });
+                    return false;
+                }
+
+                if (alamat == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'Alamat Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#alamat").focus();
+                    });
+                    return false;
+                }
+
+                if (roles == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'Roles Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#roles").focus();
+                    });
+                    return false;
+                }
+
+                return true;
+
+            });
         });
     </script>
-@endsection
+@endpush

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoriController;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -48,4 +49,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Role
     Route::resource('admin/role', RoleController::class);
+
+    // Monitoring
+    Route::get('admin/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
+    Route::post('admin/monitoring/getabsensi', [MonitoringController::class, 'getabsensi'])->name('monitoring.getabsensi');
+    Route::post('admin/monitoring/tampilkanpeta', [MonitoringController::class, 'tampilkanpeta'])->name('monitoring.tampilkanpeta');
 });

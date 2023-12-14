@@ -25,24 +25,25 @@
                                 @csrf
 
                                 <div class="row">
-                                    <div class="col">
+                                    <div class="col-12">
                                         <div class="form-group">
+                                            <label for="name">Role Name:</label>
                                             <input type="text" name="name" id="name" class="form-control"
-                                                placeholder="Name">
+                                                value="{{ old('name') }}" placeholder="Name">
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col">
+                                    <div class="col-12 mt-2">
                                         <label>Permissions:</label>
-                                        @foreach ($permissions as $permission)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="permissions[]"
-                                                    value="{{ $permission->name }}">
-                                                <label class="form-check-label">{{ $permission->name }}</label>
-                                            </div>
-                                        @endforeach
+                                        <div class="form-group">
+                                            @foreach ($permissions as $permission)
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="permissions[]"
+                                                        value="{{ $permission->name }}">
+                                                    <label class="form-check-label">{{ $permission->name }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
 
@@ -59,29 +60,37 @@
     </div>
 @endsection
 
-<script>
-    $("#formRole").submit(function() {
-        var name = $("#name").val();
-        if (name.trim() === "") {
-            Swal.fire({
-                title: "Oops!",
-                text: "Nama Tidak Boleh Kosong!",
-                icon: "error",
-            });
-            return false;
-        }
+@push('myscript')
+    <script>
+        $(function() {
+            $("#formRole").submit(function() {
+                var name = $("#name").val();
+                var permissions = $("input[name='permissions[]']:checked").length;
 
-        // Check if at least one permission is selected
-        var selectedPermissions = $("input[name='permissions[]']:checked").length;
-        if (selectedPermissions < 1) {
-            Swal.fire({
-                title: "Oops!",
-                text: "Pilih setidaknya satu permission!",
-                icon: "error",
-            });
-            return false;
-        }
+                if (name == "") {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'Name Tidak Boleh Kosong!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("#name").focus();
+                    });
+                    return false;
+                }
 
-        return true;
-    });
-</script>
+                if (permissions == 0) {
+                    Swal.fire({
+                        title: 'Warning',
+                        text: 'Pilih setidaknya satu permission!',
+                        icon: 'warning',
+                    }).then((result) => {
+                        $("input[name='permissions[]']").first().focus();
+                    });
+                    return false;
+                }
+
+                return true;
+            });
+        });
+    </script>
+@endpush

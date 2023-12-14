@@ -20,12 +20,38 @@
                     {{-- content --}}
                     <div class="card">
                         <div class="card-body">
+
+                            {{-- Alert Message --}}
+                            <div class="row">
+                                <div class="col-12">
+                                    @if (Session::get('success'))
+                                        <div class="alert alert-success">
+                                            {{ Session::get('success') }}
+                                        </div>
+                                    @elseif (Session::get('error'))
+                                        <div class="alert alert-danger">
+                                            {{ Session::get('error') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
                             {{-- Search Form --}}
                             <form action="{{ route('role.index') }}" method="GET" class="mb-3">
                                 <div class="input-group">
                                     <input type="text" name="q" class="form-control"
                                         placeholder="Search by role name" value="{{ request('q') }}">
-                                    <button type="submit" class="btn btn-primary">Search</button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search"
+                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                            <path d="M21 21l-6 -6" />
+                                        </svg>
+                                        Search
+                                    </button>
                                 </div>
                             </form>
 
@@ -40,27 +66,51 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse($roles as $role)
+                                        @forelse($roles as $item)
                                             <tr>
-                                                <td>{{ $role->name }}</td>
+                                                <td>{{ $item->name }}</td>
                                                 <td>
-                                                    @foreach ($role->permissions as $permission)
+                                                    @foreach ($item->permissions as $permission)
                                                         <span class="badge badge-primary shadow border-0 ms-2 mb-2">
                                                             {{ $permission->name }}
                                                         </span>
                                                     @endforeach
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('role.edit', $role->id) }}"
+                                                    <a href="{{ route('role.edit', $item->id) }}"
                                                         class="btn btn-success btn-sm me-2">
-                                                        <i class="fa fa-pencil-alt me-1"></i> EDIT
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="icon icon-tabler icon-tabler-edit" width="24"
+                                                            height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                                            stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                            <path
+                                                                d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                            <path
+                                                                d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                            <path d="M16 5l3 3" />
+                                                        </svg>
                                                     </a>
-                                                    <form action="{{ route('role.destroy', $role->id) }}" method="POST"
-                                                        class="d-inline">
+                                                    <form id="deleteForm{{ $item->id }}"
+                                                        action="{{ route('role.destroy', $item->id) }}" method="POST"
+                                                        class="d-inline"
+                                                        onsubmit="confirmDelete(event, {{ $item->id }});">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm">
-                                                            <i class="fa fa-trash"></i> DELETE
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                class="icon icon-tabler icon-tabler-trash" width="24"
+                                                                height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                                stroke="currentColor" fill="none" stroke-linecap="round"
+                                                                stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                                <path d="M4 7l16 0" />
+                                                                <path d="M10 11l0 6" />
+                                                                <path d="M14 11l0 6" />
+                                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                            </svg>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -75,11 +125,20 @@
                             </div>
 
                             {{-- Pagination --}}
-                            {{ $roles->links() }}
+                            <div class="mt-2">
+                                {{ $roles->links('vendor.pagination.bootstrap-5') }}
+                            </div>
 
                             <div class="mt-3 text-end">
                                 <a href="{{ route('role.create') }}" class="btn btn-primary">
-                                    <i class="fa fa-plus me-1"></i> Tambah
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus"
+                                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M12 5l0 14" />
+                                        <path d="M5 12l14 0" />
+                                    </svg>
+                                    Tambah
                                 </a>
                             </div>
                         </div>

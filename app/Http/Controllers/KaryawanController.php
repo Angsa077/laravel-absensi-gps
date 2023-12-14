@@ -12,7 +12,7 @@ class KaryawanController extends Controller
     {
         $karyawan = User::when(request()->q, function ($query) {
             $query->where('name', 'like', '%' . request()->q . '%');
-        })->with('roles')->latest()->paginate(5);
+        })->with('roles:id,name')->latest()->paginate(5);
 
         return view('admin.karyawan.index', compact('karyawan'));
     }
@@ -27,9 +27,9 @@ class KaryawanController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|',
-            'email' => 'required|email|unique:users',
-            'nip' => 'required',
-            'nik' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'nip' => 'required|numeric|unique:users,nip',
+            'nik' => 'required|numeric|unique:users,nik',
             'no_hp' => 'required',
             'tgl_lahir' => 'required',
             'alamat' => 'required',
@@ -52,27 +52,24 @@ class KaryawanController extends Controller
             return redirect()->route('karyawan.index')->with(['success' => 'Data Berhasil Disimpan']);
         } else {
             return redirect()->route('karyawan.index')->with(['error' => 'Data Gagal Disimpan']);
-        }
+        }        
     }
 
     public function edit(string $id)
     {
-        $karyawan = User::with('roles')->findOrFail($id);
+        $karyawan = User::with('roles:id,name')->findOrFail($id);
         $roles = Role::all();
         return view('admin.karyawan.edit', compact('karyawan', 'roles'));
     }
 
     public function update(Request $request, User $karyawan)
     {
-        // dd($user->id);
-        /**
-         * validate request
-         */
+
         $this->validate($request, [
             'name'     => 'required',
             'email'    => 'required|unique:users,email,'.$karyawan->id,
-            'nip' => 'required',
-            'nik' => 'required',
+            'nip' => 'required|unique:users,nip,'.$karyawan->id,
+            'nik' => 'required|unique:users,nik,'.$karyawan->id,
             'no_hp' => 'required',
             'tgl_lahir' => 'required',
             'alamat' => 'required',
