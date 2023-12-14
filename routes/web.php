@@ -40,6 +40,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/izin/create', [IzinController::class, 'create'])->name('izin.create');
     Route::post('/izin', [IzinController::class, 'store'])->name('izin.store');
 
+    // Izin Approve
+    Route::get('/admin/izin', [IzinController::class, 'handle'])->name('izin.handle');
+    Route::post('/admin/izin/approved', [IzinController::class, 'approved'])->name('izin.approved');
+    Route::get('/admin/izin/{id}/cancel', [IzinController::class, 'cancel'])->name('izin.cancel');
+
     // Admin
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
