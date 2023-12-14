@@ -145,7 +145,7 @@
                                 </a>
                             </div>
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="/">
+                                <a class="dropdown-item" href="{{ route('laporan.rekapabsensi') }}">
                                     Rekab Absensi
                                 </a>
                             </div>

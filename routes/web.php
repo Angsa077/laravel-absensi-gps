@@ -59,4 +59,6 @@ Route::group(['middleware' => ['auth']], function () {
     // Laporan
     Route::get('admin/laporan/absensi', [LaporanController::class, 'absensi'])->name('laporan.absensi');
     Route::post('admin/laporan/cetakabsensi', [LaporanController::class, 'cetakabsensi'])->name('laporan.cetakabsensi');
+    Route::get('admin/laporan/rekapabsensi', [LaporanController::class, 'rekapabsensi'])->name('laporan.rekapabsensi');
+    Route::post('admin/laporan/cetakrekapabsensi', [LaporanController::class, 'cetakrekapabsensi'])->name('laporan.cetakrekapabsensi');
 });
