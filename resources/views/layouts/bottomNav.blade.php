@@ -13,13 +13,25 @@
                 <strong>Histori</strong>
             </div>
         </a>
-        <a href="{{ route('absensi.create') }}" class="item">
-            <div class="col">
-                <div class="action-button large">
-                    <ion-icon name="camera" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
+
+        @if (!empty($absensi->lokasi_keluar))
+            <a href="#" class="item" id="sudahAbsen">
+                <div class="col">
+                    <div class="action-button large">
+                        <ion-icon name="camera" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        @else
+            <a href="{{ route('absensi.create') }}" class="item">
+                <div class="col">
+                    <div class="action-button large">
+                        <ion-icon name="camera" role="img" class="md hydrated" aria-label="add outline"></ion-icon>
+                    </div>
+                </div>
+            </a>
+        @endif
+
         <a href="{{ route('izin.index') }}"
             class="item {{ request()->routeIs('izin.index') || request()->routeIs('izin.create') ? 'active' : '' }}">
             <div class="col">
@@ -37,3 +49,20 @@
         </a>
     </div>
     <!-- * App Bottom Menu -->
+
+    @push('sudah-absen')
+        <script>
+            $(document).ready(function() {
+                $('#sudahAbsen').click(function(e) {
+                    e.preventDefault();
+
+                    Swal.fire({
+                        title: 'Absen Pulang',
+                        text: 'Anda sudah melakukan absen pulang.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            });
+        </script>
+    @endpush

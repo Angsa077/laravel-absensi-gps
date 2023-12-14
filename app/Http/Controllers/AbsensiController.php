@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensi;
+use App\Models\LokasiKantor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,8 @@ class AbsensiController extends Controller
         $tgl_absensi = date('Y-m-d');
         $user_id = Auth::user()->id;
         $cek = DB::table('absensis')->whereDate('created_at', $tgl_absensi)->where('user_id', $user_id)->count();
-        return view('absensi.create', compact('cek'));
+        $lokasi_kantor = LokasiKantor::where('id', 1)->first();
+        return view('absensi.create', compact('cek', 'lokasi_kantor'));
     }
 
     public function store(Request $request)
@@ -23,23 +25,18 @@ class AbsensiController extends Controller
         $user_id = Auth::user()->id;
         $user_name = Auth::user()->nip;
         $tgl_absensi = date('Y-m-d');
+
+        // Lokasi User
         $lokasi = $request->lokasi;
-
-        // lokasi kantor contoh dari maps yang error ke jakarta PT Transportasi Jakarta Rawa Buaya
-        // $latitudeKantor = -6.159423188334594;
-        // $longitudeKantor = 106.72437925975636;
-
-        // lokasi kantor contoh menyesuaikan lokasi user
         $lokasiUser = explode(',', $lokasi);
-
-        // $latitudeKantor = -6.160384;
-        // $longitudeKantor = 106.725376;
-
-        $latitudeKantor = $lokasiUser[0];
-        $longitudeKantor =  $lokasiUser[1];
-
         $latitudeUser = $lokasiUser[0];
         $longitudeUser = $lokasiUser[1];
+
+        // Lokasi Kantor
+        $lokasi_kantor = LokasiKantor::where('id', 1)->first();
+        $loktor = explode(',', $lokasi_kantor->lokasi);
+        $latitudeKantor = $loktor[0];
+        $longitudeKantor = $loktor[1];
 
         $jarak = $this->distance($latitudeKantor, $longitudeKantor, $latitudeUser, $longitudeUser); // menghitung jarak kantor dan user satuan meter
         $radius = round($jarak['meters']); // digenapkan dengan fungsi round
@@ -55,7 +52,7 @@ class AbsensiController extends Controller
         $fileKeluar = $folderPathKeluar . $fileNameKeluar;
         $cek = DB::table('absensis')->whereDate('created_at', $tgl_absensi)->where('user_id', $user_id)->count();
 
-        if ($radius > 20) {
+        if ($radius > $lokasi_kantor->radius) {
             echo "error|Maaf Anda Berada Diluar Radius . Jarak Anda " . $radius . " Meter Dari Kantor!|radius";
         } else {
             if ($cek > 0) {
@@ -64,7 +61,7 @@ class AbsensiController extends Controller
                     'foto_keluar' => $fileNameKeluar,
                     'lokasi_keluar' => $lokasi,
                 ]);
-    
+
                 if ($simpan) {
                     Storage::put($fileKeluar, $image_base64);
                     echo "success|Terimakasih, Hati Hati Di Jalan|out";
@@ -78,7 +75,7 @@ class AbsensiController extends Controller
                     'lokasi_masuk' => $lokasi,
                 ]);
                 $simpan = $absensi->save();
-    
+
                 if ($simpan) {
                     Storage::put($fileMasuk, $image_base64);
                     echo "success|Terimakasih, Selamat Bekerja|in";

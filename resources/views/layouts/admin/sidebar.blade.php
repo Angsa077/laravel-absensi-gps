@@ -172,7 +172,7 @@
                             </svg>
                         </span>
                         <span class="nav-link-title">
-                            Settings
+                            Konfigurasi
                         </span>
                     </a>
                     <div class="dropdown-menu">
@@ -185,6 +185,11 @@
                             <div class="dropdown-menu-column">
                                 <a class="dropdown-item" href="{{ route('role.index') }}">
                                     Roles
+                                </a>
+                            </div>
+                            <div class="dropdown-menu-column">
+                                <a class="dropdown-item" href="{{ route('lokasi.index') }}">
+                                    Lokasi Kantor
                                 </a>
                             </div>
                         </div>

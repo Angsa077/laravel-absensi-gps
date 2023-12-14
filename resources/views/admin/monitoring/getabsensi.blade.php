@@ -1,20 +1,5 @@
 @foreach ($absensi as $item)
     @php
-        function selisih($jam_in, $jam_out)
-        {
-            [$h, $m, $s] = explode(':', $jam_in);
-            $dtgAwal = mktime($h, $m, $s, '1', '1', '1');
-            [$h, $m, $s] = explode(':', $jam_out);
-            $dtgAkhir = mktime($h, $m, $s, '1', '1', '1');
-            $dtgSelisih = $dtgAkhir - $dtgAwal;
-            $totalMenit = $dtgSelisih / 60;
-            $jam = explode('.', $totalMenit / 60);
-            $sisaMenit = $totalMenit / 60 - $jam[0];
-            $sisaMenit2 = $sisaMenit * 60;
-            $jmlJam = $jam[0];
-            return $jmlJam . ':' . round($sisaMenit2);
-        }
-
         $foto_masuk = Storage::url('uploads/absensi/foto_masuk/' . $item->foto_masuk);
         $foto_keluar = Storage::url('uploads/absensi/foto_keluar/' . $item->foto_keluar);
     @endphp

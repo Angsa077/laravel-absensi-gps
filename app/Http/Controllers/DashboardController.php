@@ -14,6 +14,7 @@ class DashboardController extends Controller
         $bulanIni = date('m') * 1;
         $tahunIni = date('Y');
         $user_id = Auth::user()->id;
+        $absensi = Absensi::where('user_id', $user_id)->first();
 
         $absensiHariIni = Absensi::where('user_id', $user_id)
             ->whereDate('created_at', $hariIni)
@@ -46,6 +47,6 @@ class DashboardController extends Controller
 
         $namaBulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
-        return view('dashboard.index', compact('absensiHariIni', 'historiBulanIni', 'namaBulan', 'bulanIni', 'tahunIni', 'rekabAbsensi', 'leaderboard', 'rekabIzin'));
+        return view('dashboard.index', compact('absensi', 'absensiHariIni', 'historiBulanIni', 'namaBulan', 'bulanIni', 'tahunIni', 'rekabAbsensi', 'leaderboard', 'rekabIzin'));
     }
 }

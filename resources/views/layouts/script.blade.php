@@ -69,5 +69,6 @@
 
 @stack('alert-logout')
 @stack('webcam-capture')
+@stack('sudah-absen')
 @stack('search-histori')
 @stack('date-picker')

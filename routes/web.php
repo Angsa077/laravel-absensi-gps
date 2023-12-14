@@ -7,6 +7,7 @@ use App\Http\Controllers\HistoriController;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
@@ -50,6 +51,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Role
     Route::resource('admin/role', RoleController::class);
+
+    // Lokasi Kantor
+    Route::get('/admin/lokasi', [LokasiController::class, 'index'])->name('lokasi.index');
+    Route::post('admin/lokasi/update', [LokasiController::class, 'update'])->name('lokasi.update');
 
     // Monitoring
     Route::get('admin/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');

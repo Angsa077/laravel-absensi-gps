@@ -145,7 +145,7 @@
                             <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
                                 <span class="badge badge-success"
                                     style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">
-                                    {{ $rekabAbsensi->jmlHadir }}</span>
+                                    {{ $rekabAbsensi->jmlHadir ? $rekabAbsensi->jmlHadir : 0 }}</span>
                                 <ion-icon name="accessibility-outline" style="font-size: 1.6rem"
                                     class="text-primary mb-1"></ion-icon>
                                 <br>
@@ -158,7 +158,7 @@
                             <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
                                 <span class="badge badge-warning"
                                     style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">
-                                    {{ $rekabIzin->jmlIzin }}</span>
+                                    {{ $rekabIzin->jmlIzin ? $rekabIzin->jmlIzin : 0 }}</span>
                                 <ion-icon name="newspaper-outline" style="font-size: 1.6rem"
                                     class="text-primary mb-1"></ion-icon>
                                 <br>
@@ -170,7 +170,7 @@
                         <div class="card">
                             <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
                                 <span class="badge badge-warning"
-                                    style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">{{ $rekabIzin->jmlSakit }}</span>
+                                    style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">{{ $rekabIzin->jmlSakit ? $rekabIzin->jmlSakit : 0 }}</span>
                                 <ion-icon name="medkit-outline" style="font-size: 1.6rem"
                                     class="text-primary mb-1"></ion-icon>
                                 <br>
@@ -183,7 +183,7 @@
                             <div class="card-body text-center" style="padding: 12px 12px !important; line-height: 0.8rem">
                                 <span class="badge badge-danger"
                                     style="position: absolute; top: 3px; right: 10px; font-size:0.6rem; z-index: 999">
-                                    {{ $rekabAbsensi->jmlTerlambat }}</span>
+                                    {{ $rekabAbsensi->jmlTerlambat ? $rekabAbsensi->jmlTerlambat : 0 }}</span>
                                 <ion-icon name="alarm-outline" style="font-size: 1.6rem"
                                     class="text-primary mb-1"></ion-icon>
                                 <br>

@@ -125,9 +125,9 @@
                             }
                             ?>
                             <td>
-                                <span style="background-color: {{ $hadir[0] > '07:00:00' ? 'red' : '' }}">
+                                <span style="background-color: {{ $hadir[0] >= '07:00:00' ? 'red' : '' }}">
                                     {{ $hadir[0] }}</span><br>
-                                <span style="background-color: {{ $hadir[1] > '16:00:00' ? 'red' : '' }}">
+                                <span style="background-color: {{ $hadir[1] <= '16:00:00' ? 'red' : '' }}">
                                     {{ $hadir[0] }}</span>
                             </td>
                         @endfor

@@ -86,18 +86,22 @@
         function successCallback(position) {
             lokasi.value = position.coords.latitude + "," + position.coords.longitude;
             var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 15);
+            var lokasi_kantor = "{{ $lokasi_kantor->lokasi }}";
+            var loktor = lokasi_kantor.split(",");
+            var lat_kantor = loktor[0];
+            var long_kantor = loktor[1];
+            var radius = "{{ $lokasi_kantor->radius }}"
+
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-            // radius kantor nanti dirubah sesuai titik coord kantor
-            //  var circle = L.circle([-6.159423188334594, 106.72437925975636], {
-            var circle = L.circle([position.coords.latitude, position.coords.longitude], {
+            var circle = L.circle([lat_kantor, long_kantor], {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: 20
+                radius: radius
             }).addTo(map);
         }
 
