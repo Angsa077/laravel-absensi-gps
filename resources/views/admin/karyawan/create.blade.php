@@ -24,7 +24,7 @@
                                 @csrf
 
                                 <div class="row">
-                                    <div class="col-md-6 space-y-2">
+                                    <div class="col-md-6 space-y-3">
                                         <div class="form-group">
                                             <label for="name">Nama Lengkap:</label>
                                             <input type="text" name="name" id="name" class="form-control"
@@ -59,7 +59,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 space-y-2">
+                                    <div class="col-md-6 space-y-3">
                                         <div class="form-group">
                                             <label for="no_hp">No HP:</label>
                                             <input type="text" name="no_hp" id="no_hp" class="form-control"
@@ -76,22 +76,24 @@
                                             <label for="alamat">Alamat:</label>
                                             <textarea name="alamat" id="alamat" class="form-control" placeholder="Alamat">{{ old('alamat') }}</textarea>
                                         </div>
-                                        
+
                                         <div class="form-group">
-                                            <select name="roles[]" id="roles" class="form-select" multiple>
+                                            <select name="roles[]" id="roles" class="form-select">
                                                 @foreach ($roles as $role)
                                                     <option {{ Request('roles[]') == $role->name ? 'selected' : '' }}
                                                         value="{{ $role->name }}">{{ $role->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
+
                                     </div>
                                 </div>
 
                                 <div class="form-group mt-3">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <button type="submit" class="btn btn-primary w-100">Simpan</button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

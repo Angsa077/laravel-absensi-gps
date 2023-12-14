@@ -11,8 +11,10 @@
                         @endphp
                         <img src="{{ url($path) }}" alt="avatar" class="imaged" style="width: 54px; height:54px;">
                     @else
-                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged"
-                            style="width: 54px; height:54px;">
+                        @php
+                            $pathDefault = Storage::url('../assets/img/avatar1.jpg');
+                        @endphp
+                        <img src="{{ url($pathDefault) }}" alt="avatar" class="imaged" style="width: 54px; height:54px;">
                     @endif
                 </div>
                 <div id="user-info">

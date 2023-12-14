@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HistoriController;
 use App\Http\Controllers\IzinController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
@@ -33,7 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/histori', [HistoriController::class, 'index'])->name('histori.index');
     Route::post('/gethistori', [HistoriController::class, 'gethistori'])->name('absensi.gethistori');
 
-    // Histori
+    // Izin
     Route::get('/izin', [IzinController::class, 'index'])->name('izin.index');
     Route::get('/izin/create', [IzinController::class, 'create'])->name('izin.create');
     Route::post('/izin', [IzinController::class, 'store'])->name('izin.store');
@@ -54,4 +55,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('admin/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
     Route::post('admin/monitoring/getabsensi', [MonitoringController::class, 'getabsensi'])->name('monitoring.getabsensi');
     Route::post('admin/monitoring/tampilkanpeta', [MonitoringController::class, 'tampilkanpeta'])->name('monitoring.tampilkanpeta');
+
+    // Laporan
+    Route::get('admin/laporan/absensi', [LaporanController::class, 'absensi'])->name('laporan.absensi');
+    Route::post('admin/laporan/cetakabsensi', [LaporanController::class, 'cetakabsensi'])->name('laporan.cetakabsensi');
 });

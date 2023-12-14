@@ -76,6 +76,7 @@
                                         @forelse ($karyawan as $item)
                                             @php
                                                 $path = Storage::url('uploads/profile/' . $item->profile_photo_path);
+                                                $pathDefault = Storage::url('../assets/img/avatar1.jpg');
                                             @endphp
                                             <tr>
                                                 <td>{{ $loop->iteration + $karyawan->firstItem() - 1 }}</td>
@@ -88,11 +89,11 @@
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>
                                                     @if (empty($item->profile_photo_path))
-                                                        <img src="{{ asset('assets/img/no-avatar.png') }}" alt="image"
-                                                            class="image" style="width: 54px; height:54px;">
+                                                        <img src="{{ url($pathDefault) }}" alt="image" class="image"
+                                                            style="width: 48px; height:48px;">
                                                     @else
                                                         <img src="{{ url($path) }}" alt="image" class="image"
-                                                            style="width: 54px; height:54px;">
+                                                            style="width: 48px; height:48px;">
                                                     @endif
                                                 </td>
                                                 <td class="text-center">

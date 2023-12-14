@@ -25,6 +25,7 @@
 
 @stack('myscript')
 @stack('date-picker')
+@stack('alert-logout')
 
 <script>
     function confirmDelete(event, id) {
