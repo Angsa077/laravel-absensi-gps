@@ -28,16 +28,18 @@
             <div class="card">
                 <div class="card-body text-center">
                     <div class="list-menu">
-                        <div class="item-menu text-center">
-                            <div class="menu-icon">
-                                <a href="{{ route('admin.index') }}" class="orange" style="font-size: 32px;">
-                                    <ion-icon name="server-outline"></ion-icon>
-                                </a>
+                        @can('admin.index')
+                            <div class="item-menu text-center">
+                                <div class="menu-icon">
+                                    <a href="{{ route('admin.index') }}" class="orange" style="font-size: 32px;">
+                                        <ion-icon name="server-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="menu-name">
+                                    Admin
+                                </div>
                             </div>
-                            <div class="menu-name">
-                                Admin
-                            </div>
-                        </div>
+                        @endcan
                         <div class="item-menu text-center">
                             <div class="menu-icon">
                                 <a href="{{ route('profile.index') }}" class="green" style="font-size: 32px;">

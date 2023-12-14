@@ -40,35 +40,46 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/izin/create', [IzinController::class, 'create'])->name('izin.create');
     Route::post('/izin', [IzinController::class, 'store'])->name('izin.store');
 
-    // Izin Approve
-    Route::get('/admin/izin', [IzinController::class, 'handle'])->name('izin.handle');
-    Route::post('/admin/izin/approved', [IzinController::class, 'approved'])->name('izin.approved');
-    Route::get('/admin/izin/{id}/cancel', [IzinController::class, 'cancel'])->name('izin.cancel');
-
     // Admin
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')
+    ->middleware('permission:admin.index');
 
     // Karyawan
-    Route::resource('/admin/karyawan', KaryawanController::class);
+    Route::resource('/admin/karyawan', KaryawanController::class)
+    ->middleware('permission:karyawan.index|karyawan.create|karyawan.edit|karyawan.delete');
 
     // Permission
-    Route::get('/admin/permission', PermissionController::class)->name('permission.index');
+    Route::get('/admin/permission', PermissionController::class)->name('permission.index')
+    ->middleware('permission:permission.index');
 
     // Role
-    Route::resource('admin/role', RoleController::class);
+    Route::resource('admin/role', RoleController::class)
+    ->middleware('permission:role.index|role.create|role.edit|role.delete');
 
     // Lokasi Kantor
-    Route::get('/admin/lokasi', [LokasiController::class, 'index'])->name('lokasi.index');
+    Route::get('/admin/lokasi', [LokasiController::class, 'index'])->name('lokasi.index')
+    ->middleware('permission:lokasi.index');
     Route::post('admin/lokasi/update', [LokasiController::class, 'update'])->name('lokasi.update');
 
     // Monitoring
-    Route::get('admin/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
+    Route::get('admin/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index')
+    ->middleware('permission:monitoring.index');
     Route::post('admin/monitoring/getabsensi', [MonitoringController::class, 'getabsensi'])->name('monitoring.getabsensi');
     Route::post('admin/monitoring/tampilkanpeta', [MonitoringController::class, 'tampilkanpeta'])->name('monitoring.tampilkanpeta');
 
     // Laporan
-    Route::get('admin/laporan/absensi', [LaporanController::class, 'absensi'])->name('laporan.absensi');
+    Route::get('admin/laporan/absensi', [LaporanController::class, 'absensi'])->name('laporan.absensi')
+    ->middleware('permission:laporan.absensi');
     Route::post('admin/laporan/cetakabsensi', [LaporanController::class, 'cetakabsensi'])->name('laporan.cetakabsensi');
-    Route::get('admin/laporan/rekapabsensi', [LaporanController::class, 'rekapabsensi'])->name('laporan.rekapabsensi');
+
+    Route::get('admin/laporan/rekapabsensi', [LaporanController::class, 'rekapabsensi'])->name('laporan.rekapabsensi')
+    ->middleware('permission:laporan.rekapabsensi');
     Route::post('admin/laporan/cetakrekapabsensi', [LaporanController::class, 'cetakrekapabsensi'])->name('laporan.cetakrekapabsensi');
+
+    // Izin Approve
+    Route::get('/admin/izin', [IzinController::class, 'handle'])->name('izin.handle')
+    ->middleware('permission:izin.handle');
+    Route::post('/admin/izin/approved', [IzinController::class, 'approved'])->name('izin.approved');
+    Route::get('/admin/izin/{id}/cancel', [IzinController::class, 'cancel'])->name('izin.cancel')
+    ->middleware('permission:izin.cancel');
 });
