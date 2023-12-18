@@ -65,6 +65,9 @@
                                             <label for="no_hp">No HP:</label>
                                             <input type="text" name="no_hp" id="no_hp" class="form-control"
                                                 value="{{ $karyawan->no_hp }}">
+                                            @error('no_hp')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group">
@@ -82,7 +85,8 @@
                                         <div class="form-group">
                                             <select name="roles[]" id="roles" class="form-select" multiple>
                                                 @foreach ($roles as $role)
-                                                    <option {{ Request('roles[]') == $role->name ? 'selected' : '' }}
+                                                    <option
+                                                        {{ in_array($role->name, $karyawan->roles->pluck('name')->toArray()) ? 'selected' : '' }}
                                                         value="{{ $role->name }}">{{ $role->name }}</option>
                                                 @endforeach
                                             </select>

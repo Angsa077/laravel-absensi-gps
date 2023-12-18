@@ -64,6 +64,9 @@
                                             <label for="no_hp">No HP:</label>
                                             <input type="text" name="no_hp" id="no_hp" class="form-control"
                                                 value="{{ old('no_hp') }}" placeholder="No HP">
+                                            @error('no_hp')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group">

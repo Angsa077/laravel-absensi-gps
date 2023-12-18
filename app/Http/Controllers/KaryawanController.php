@@ -26,13 +26,17 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|',
-            'email' => 'required|email|unique:users,email',
-            'nip' => 'required|numeric|unique:users,nip',
-            'nik' => 'required|numeric|unique:users,nik',
-            'no_hp' => 'required',
-            'tgl_lahir' => 'required',
-            'alamat' => 'required',
+            'email' => 'unique:users,email',
+            'nip' => 'numeric|unique:users,nip',
+            'nik' => 'numeric|unique:users,nik',
+            'no_hp'    => 'numeric',
+        ], [
+            'email.unique' => 'Email sudah terdaftar',
+            'nip.unique' => 'NIP sudah terdaftar',
+            'nip.numeric' => 'NIK harus angka',
+            'nik.unique' => 'NIK sudah terdaftar',
+            'nik.numeric' => 'NIK harus angka',
+            'no_hp.numeric' => 'No HP harus angka',
         ]);
 
         $karyawan = User::create([
@@ -66,13 +70,17 @@ class KaryawanController extends Controller
     {
 
         $this->validate($request, [
-            'name'     => 'required',
-            'email'    => 'required|unique:users,email,'.$karyawan->id,
-            'nip' => 'required|unique:users,nip,'.$karyawan->id,
-            'nik' => 'required|unique:users,nik,'.$karyawan->id,
-            'no_hp' => 'required',
-            'tgl_lahir' => 'required',
-            'alamat' => 'required',
+            'email'    => 'unique:users,email,'.$karyawan->id,
+            'nip' => 'numeric|unique:users,nip,'.$karyawan->id,
+            'nik' => 'numeric|unique:users,nik,'.$karyawan->id,
+            'no_hp'    => 'numeric',
+        ], [
+            'email.unique' => 'Email sudah terdaftar',
+            'nip.unique' => 'NIP sudah terdaftar',
+            'nip.numeric' => 'NIK harus angka',
+            'nik.unique' => 'NIK sudah terdaftar',
+            'nik.numeric' => 'NIK harus angka',
+            'no_hp.numeric' => 'No HP harus angka',
         ]);
 
         $karyawan->update([

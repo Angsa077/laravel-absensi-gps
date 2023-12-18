@@ -62,10 +62,6 @@ Route::group(['middleware' => ['auth']], function () {
     ->middleware('permission:lokasi.index');
     Route::post('admin/lokasi/update', [LokasiController::class, 'update'])->name('lokasi.update');
 
-    Route::get('/admin/jamkerja', [LokasiController::class, 'index'])->name('jamkerja.index')
-    ->middleware('permission:jamkerja.index');
-    Route::post('admin/jamkerja/update', [LokasiController::class, 'update'])->name('jamkerja.update');
-
     // Monitoring
     Route::get('admin/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index')
     ->middleware('permission:monitoring.index');

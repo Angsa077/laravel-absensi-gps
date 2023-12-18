@@ -211,11 +211,6 @@
                                     Lokasi Kantor
                                 </a>
                             </div>
-                            <div class="dropdown-menu-column">
-                                <a class="dropdown-item {{ request()->routeIs('jamkerja.index') ? 'active' : '' }}" href="{{ route('jamkerja.index') }}">
-                                    Jam Kerja
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </li>
