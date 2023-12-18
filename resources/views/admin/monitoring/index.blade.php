@@ -58,7 +58,6 @@
                                             <th>Jam Pulang</th>
                                             <th>Foto</th>
                                             <th>Keterangan</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
 

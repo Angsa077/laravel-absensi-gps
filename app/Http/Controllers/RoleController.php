@@ -12,7 +12,7 @@ class RoleController extends Controller
     {
         $roles = Role::when(request()->q, function ($query) {
             $query->where('name', 'like', '%' . request()->q . '%');
-        })->with('permissions:id,name')->latest()->paginate(5);
+        })->with('permissions:id,name')->latest()->paginate(5)->appends(request()->only('q'));
 
         return view('admin.role.index', compact('roles'));
     }

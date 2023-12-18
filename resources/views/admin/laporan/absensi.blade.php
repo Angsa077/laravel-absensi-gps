@@ -16,12 +16,13 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-12">
                     {{-- content --}}
                     <div class="card">
                         <div class="card-body">
                             {{-- Form Laporan --}}
-                            <form action="{{ route('laporan.cetakabsensi') }}" target="_blank" method="POST">
+                            <form action="{{ route('laporan.cetakabsensi') }}" target="_blank" method="POST"
+                                id="formLaporanAbsensi">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12 space-y-3">
@@ -51,6 +52,9 @@
                                                 @foreach ($karyawan as $item)
                                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
+                                                @error('user_id')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </select>
                                         </div>
                                     </div>
@@ -77,7 +81,7 @@
 
                                     <div class="col-md-6 mt-3">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-success w-100">
+                                            <button type="submit" class="btn btn-success w-100" name="exportexcel">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                     class="icon icon-tabler icon-tabler-download" width="24"
                                                     height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -101,3 +105,38 @@
         </div>
     </div>
 @endsection
+
+@push('myscript')
+    <script>
+        $(document).ready(function() {
+            $('#formLaporanAbsensi').submit(function(event) {
+                var bulan = $('#bulan').val();
+                var tahun = $('#tahun').val();
+                var karyawan = $('#user_id').val();
+
+                if (!bulan) {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Bulan Tidak Boleh Kosong!",
+                        icon: "error",
+                    });
+                    event.preventDefault();
+                } else if (!tahun) {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Tahun Tidak Boleh Kosong!",
+                        icon: "error",
+                    });
+                    event.preventDefault();
+                } else if (!karyawan) {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Karyawan Tidak Boleh Kosong!",
+                        icon: "error",
+                    });
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+@endpush

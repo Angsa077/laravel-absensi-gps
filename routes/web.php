@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/izin', [IzinController::class, 'index'])->name('izin.index');
     Route::get('/izin/create', [IzinController::class, 'create'])->name('izin.create');
     Route::post('/izin', [IzinController::class, 'store'])->name('izin.store');
+    Route::post('/izin/cekpengajuanizin', [IzinController::class, 'cekpengajuanizin'])->name('izin.cekpengajuanizin');
 
     // Admin
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')
@@ -60,6 +61,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/lokasi', [LokasiController::class, 'index'])->name('lokasi.index')
     ->middleware('permission:lokasi.index');
     Route::post('admin/lokasi/update', [LokasiController::class, 'update'])->name('lokasi.update');
+
+    Route::get('/admin/jamkerja', [LokasiController::class, 'index'])->name('jamkerja.index')
+    ->middleware('permission:jamkerja.index');
+    Route::post('admin/jamkerja/update', [LokasiController::class, 'update'])->name('jamkerja.update');
 
     // Monitoring
     Route::get('admin/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index')

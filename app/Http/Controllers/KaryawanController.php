@@ -12,7 +12,7 @@ class KaryawanController extends Controller
     {
         $karyawan = User::when(request()->q, function ($query) {
             $query->where('name', 'like', '%' . request()->q . '%');
-        })->with('roles:id,name')->latest()->paginate(5);
+        })->with('roles:id,name')->latest()->paginate(5)->appends(request()->only('q'));
 
         return view('admin.karyawan.index', compact('karyawan'));
     }

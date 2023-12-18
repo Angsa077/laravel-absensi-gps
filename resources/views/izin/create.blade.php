@@ -7,6 +7,7 @@
         .datepicker-modal {
             max-height: 430px !important;
         }
+
         .datepicker-date-display {
             background-color: #1e74fd !important;
         }
@@ -32,7 +33,8 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <input type="text" name="tgl_izin" id="tgl_izin" class="form-control datepicker" placeholder="Tanggal">
+                            <input type="text" name="tgl_izin" id="tgl_izin" class="form-control datepicker"
+                                placeholder="Tanggal">
                         </div>
                         <div class="form-group">
                             <select name="status" id="status" class="form-control">
@@ -62,35 +64,61 @@
                 format: "yyyy-mm-dd"
             });
 
-        $("#formIzin").submit(function() {
-            var tgl_izin = $("#tgl_izin").val();
-            var status = $("#status").val();
-            var keterangan = $("#keterangan").val();
-            if (tgl_izin == "") {
-                Swal.fire({
-                    title: "Oops!",
-                    text: "Tgl Izin Tidak Boleh Kosong!",
-                    icon: "error",
+            $("#tgl_izin").change(function(e) {
+                var tgl_izin = $(this).val();
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('izin.cekpengajuanizin') }}",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        tgl_izin: tgl_izin
+                    },
+                    cache: false,
+                    success: function(response) {
+                        if (response == 1) {
+                            Swal.fire({
+                                title: "Oops!",
+                                text: "Anda Sudah Melakukan Pengajuan Izin / Sakit Pada Tanggal Tersebut!",
+                                icon: "warning",
+                            }).then((result) => {
+                                $("#tgl_izin").val("");
+                                $("#tgl_izin").focus();
+                            });
+                            return false;
+                        }
+                    }
                 });
-                return false;
-            } else if (status == "") {
-                Swal.fire({
-                    title: "Oops!",
-                    text: "Status Tidak Boleh Kosong!",
-                    icon: "error",
-                });
-                return false;
-            } else if (keterangan == "") {
-                Swal.fire({
-                    title: "Oops!",
-                    text: "Keterangan Tidak Boleh Kosong!",
-                    icon: "error",
-                });
-                return false;
-            } else {
-                return true;
-            }
-        })
+            });
+
+            $("#formIzin").submit(function() {
+                var tgl_izin = $("#tgl_izin").val();
+                var status = $("#status").val();
+                var keterangan = $("#keterangan").val();
+                if (tgl_izin == "") {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Tgl Izin Tidak Boleh Kosong!",
+                        icon: "error",
+                    });
+                    return false;
+                } else if (status == "") {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Status Tidak Boleh Kosong!",
+                        icon: "error",
+                    });
+                    return false;
+                } else if (keterangan == "") {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Keterangan Tidak Boleh Kosong!",
+                        icon: "error",
+                    });
+                    return false;
+                } else {
+                    return true;
+                }
+            });
         });
     </script>
 @endpush

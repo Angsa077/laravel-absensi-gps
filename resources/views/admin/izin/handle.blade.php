@@ -36,22 +36,87 @@
                                 </div>
                             </div>
 
+
                             {{-- Search Form --}}
-                            <form action="{{ route('izin.handle') }}" method="GET" class="mb-3">
-                                <div class="input-group">
-                                    <input type="text" name="q" class="form-control"
-                                        placeholder="Search by karyawan name" value="{{ request('q') }}">
-                                    <button type="submit" class="btn btn-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search"
-                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                            stroke="currentColor" fill="none" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                                            <path d="M21 21l-6 -6" />
-                                        </svg>
-                                        Search
-                                    </button>
+                            <form action="{{ route('izin.handle') }}" method="GET" class="mb-3" autocomplete="off">
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="input-icon mb-3">
+                                            <span class="input-icon-addon">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-calendar-event" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                                                    <path d="M16 3l0 4" />
+                                                    <path d="M8 3l0 4" />
+                                                    <path d="M4 11l16 0" />
+                                                    <path d="M8 15h2v2h-2z" />
+                                                </svg>
+                                            </span>
+                                            <input type="text" id="mulai" class="form-control"
+                                                placeholder="Mulai" name="mulai" value="{{ Request('mulai') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="input-icon mb-3">
+                                            <span class="input-icon-addon">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-calendar-event" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M4 5m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                                                    <path d="M16 3l0 4" />
+                                                    <path d="M8 3l0 4" />
+                                                    <path d="M4 11l16 0" />
+                                                    <path d="M8 15h2v2h-2z" />
+                                                </svg>
+                                            </span>
+                                            <input type="text" id="sampai" class="form-control"
+                                                placeholder="Sampai" name="sampai" value="{{ Request('sampai') }}">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="Nama Karyawan" value="{{ Request('name') }}" id="name">
+                                    </div>
+                                    <div class="col-3">
+                                        <input type="text" name="nip" class="form-control"
+                                            placeholder="NIP" id="nip" value="{{ Request('nip') }}">
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <select name="status_approved" id="status_approved" class="form-select">
+                                                <option value="">Pilih Status</option>
+                                                <option value="0" {{ Request('status_approved') === '0' ? 'selected' : '' }}>Pending</option>
+                                                <option value="1" {{ Request('status_approved') == '1' ? 'selected' : '' }}>Disetujui</option>
+                                                <option value="2" {{ Request('status_approved') == '2' ? 'selected' : '' }}>Ditolak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-search" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                                                <path d="M21 21l-6 -6" />
+                                            </svg>
+                                            Search
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
 
@@ -198,6 +263,18 @@
                 $("#id_handleizin_form").val(id_handleizin);
                 $("#modal-handleizin").modal('show');
             })
+        });
+    </script>
+@endpush
+
+@push('date-picker')
+    <script>
+        $(function() {
+            $("#mulai, #sampai").datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd'
+            });
         });
     </script>
 @endpush

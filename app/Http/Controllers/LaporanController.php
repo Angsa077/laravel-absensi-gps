@@ -19,15 +19,24 @@ class LaporanController extends Controller
     public function cetakabsensi(Request $request)
     {
         $user_id = $request->user_id;
-        $namaBulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         $bulan = $request->bulan;
         $tahun = $request->tahun;
+        $namaBulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         $karyawan = User::where('id', $user_id)->first();
         $absensi = Absensi::where('user_id', $user_id)
             ->whereMonth('created_at', $bulan)
             ->whereYear('created_at', $tahun)
             ->orderBy('created_at')
             ->get();
+
+        if (isset($_POST['exportexcel'])) {
+            // Fungsi header dengan mengirimkan data raw ke excel
+            header("Content-type: application/vnd-ms-excel");
+            // Mendefinisikan nama file ekspor "report-rekap-absensi-".$time.".xls"
+            header("Content-Disposition: attachment; filename=Report-Absensi-Karyawan-" . $karyawan->name . "-" . $bulan . "-" . $tahun . ".xls");
+            return view('admin.laporan.cetakabsensiexcel', compact('user_id', 'namaBulan', 'bulan', 'tahun', 'karyawan', 'absensi'));
+        }
+
         return view('admin.laporan.cetakabsensi', compact('user_id', 'namaBulan', 'bulan', 'tahun', 'karyawan', 'absensi'));
     }
 
@@ -80,6 +89,13 @@ class LaporanController extends Controller
             ->whereYear('absensis.created_at', $tahun)
             ->groupBy('users.nip', 'users.name')
             ->get();
+
+        if (isset($_POST['exportexcel'])) {
+            // Fungsi header dengan mengirimkan data raw ke excel
+            header("Content-type: application/vnd-ms-excel");
+            // Mendefinisikan nama file ekspor "report-rekap-absensi-".$time.".xls"
+            header("Content-Disposition: attachment; filename=Report-Rekap-Absensi-Karyawan-" . $bulan . "-" . $tahun . ".xls");
+        }
 
         return view('admin.laporan.cetakrekapabsensi', compact('bulan', 'tahun', 'namaBulan', 'absensi'));
     }

@@ -48,7 +48,7 @@
             <ul class="navbar-nav pt-lg-3">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.index') }}">
+                    <a class="nav-link {{ request()->routeIs('admin.index') ? 'show' : '' }}" href="{{ route('admin.index') }}">
                         <span
                             class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -67,8 +67,8 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
-                        data-bs-auto-close="false" role="button" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle {{ request()->routeIs('karyawan.index') ? 'show' : '' }}" href="#navbar-base" data-bs-toggle="dropdown"
+                        data-bs-auto-close="false" role="button" aria-expanded="{{ request()->routeIs('karyawan.index') ? 'true' : '' }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                 viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -85,10 +85,10 @@
                             Data Master
                         </span>
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu {{ request()->routeIs('karyawan.index') ? 'show' : '' }}">
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="{{ route('karyawan.index') }}">
+                                <a class="dropdown-item {{ request()->routeIs('karyawan.index') ? 'active' : '' }}" href="{{ route('karyawan.index') }}">
                                     Data Karyawan
                                 </a>
                             </div>
@@ -97,7 +97,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('monitoring.index') }}">
+                    <a class="nav-link {{ request()->routeIs('monitoring.index') ? 'show' : '' }}" href="{{ route('monitoring.index') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-heart-rate-monitor" width="24" height="24"
@@ -119,7 +119,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('izin.handle') }}">
+                    <a class="nav-link {{ request()->routeIs('izin.handle') ? 'show' : '' }}" href="{{ route('izin.handle') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home-question"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -138,8 +138,8 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
-                        data-bs-auto-close="false" role="button" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle {{ request()->routeIs('laporan.absensi') || request()->routeIs('laporan.rekapabsensi') ? 'show' : '' }}" href="#navbar-base" data-bs-toggle="dropdown"
+                        data-bs-auto-close="false" role="button" aria-expanded="{{ request()->routeIs('laporan.absensi') || request()->routeIs('laporan.rekapabsensi') ? 'true' : '' }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 class="icon icon-tabler icon-tabler-file-description" width="24" height="24"
@@ -156,15 +156,15 @@
                             Laporan
                         </span>
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu {{ request()->routeIs('laporan.absensi') || request()->routeIs('laporan.rekapabsensi') ? 'show' : '' }}">
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="{{ route('laporan.absensi') }}">
+                                <a class="dropdown-item {{ request()->routeIs('laporan.absensi') ? 'active' : '' }}" href="{{ route('laporan.absensi') }}">
                                     Absensi
                                 </a>
                             </div>
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="{{ route('laporan.rekapabsensi') }}">
+                                <a class="dropdown-item {{ request()->routeIs('laporan.rekapabsensi') ? 'active' : '' }}" href="{{ route('laporan.rekapabsensi') }}">
                                     Rekab Absensi
                                 </a>
                             </div>
@@ -173,8 +173,8 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown"
-                        data-bs-auto-close="false" role="button" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle {{ request()->routeIs('permission.index') || request()->routeIs('role.index') || request()->routeIs('lokasi.index') ? 'show' : '' }}" href="#navbar-base" data-bs-toggle="dropdown"
+                        data-bs-auto-close="false" role="button" aria-expanded="{{ request()->routeIs('permission.index') || request()->routeIs('role.index') || request()->routeIs('lokasi.index') ? 'true' : '' }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -194,21 +194,26 @@
                             Konfigurasi
                         </span>
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu {{ request()->routeIs('permission.index') || request()->routeIs('role.index') || request()->routeIs('lokasi.index') ? 'show' : '' }}">
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="{{ route('permission.index') }}">
+                                <a class="dropdown-item {{ request()->routeIs('permission.index') ? 'active' : '' }}" href="{{ route('permission.index') }}">
                                     Permissions
                                 </a>
                             </div>
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="{{ route('role.index') }}">
+                                <a class="dropdown-item {{ request()->routeIs('role.index') ? 'active' : '' }}" href="{{ route('role.index') }}">
                                     Roles
                                 </a>
                             </div>
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="{{ route('lokasi.index') }}">
+                                <a class="dropdown-item {{ request()->routeIs('lokasi.index') ? 'active' : '' }}" href="{{ route('lokasi.index') }}">
                                     Lokasi Kantor
+                                </a>
+                            </div>
+                            <div class="dropdown-menu-column">
+                                <a class="dropdown-item {{ request()->routeIs('jamkerja.index') ? 'active' : '' }}" href="{{ route('jamkerja.index') }}">
+                                    Jam Kerja
                                 </a>
                             </div>
                         </div>

@@ -16,12 +16,12 @@
     <div class="page-body">
         <div class="container-xl">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-12">
                     {{-- content --}}
                     <div class="card">
                         <div class="card-body">
                             {{-- Form Laporan --}}
-                            <form action="{{ route('laporan.cetakrekapabsensi') }}" target="_blank" method="POST">
+                            <form action="{{ route('laporan.cetakrekapabsensi') }}" target="_blank" method="POST" id="formLaporanRekapAbsensi">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12 space-y-3">
@@ -69,7 +69,7 @@
 
                                     <div class="col-md-6 mt-3">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-success w-100">
+                                            <button type="submit" class="btn btn-success w-100" name="exportexcel">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                     class="icon icon-tabler icon-tabler-download" width="24"
                                                     height="24" viewBox="0 0 24 24" stroke-width="2"
@@ -93,3 +93,31 @@
         </div>
     </div>
 @endsection
+
+@push('myscript')
+    <script>
+        $(document).ready(function() {
+            $('#formLaporanRekapAbsensi').submit(function(event) {
+                var bulan = $('#bulan').val();
+                var tahun = $('#tahun').val();
+                var karyawan = $('#user_id').val();
+
+                if (!bulan) {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Bulan Tidak Boleh Kosong!",
+                        icon: "error",
+                    });
+                    event.preventDefault();
+                } else if (!tahun) {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Tahun Tidak Boleh Kosong!",
+                        icon: "error",
+                    });
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+@endpush

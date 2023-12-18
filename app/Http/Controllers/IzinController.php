@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Izin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class IzinController extends Controller
 {
@@ -23,7 +24,6 @@ class IzinController extends Controller
     public function store(Request $request)
     {
         $user_id = Auth::user()->id;
-
         $data = [
             'user_id' => $user_id,
             'tgl_izin' => $request->tgl_izin,
@@ -40,16 +40,36 @@ class IzinController extends Controller
         }
     }
 
-    // Handle Izin Admin Panel
-    public function handle()
+    public function cekpengajuanizin(Request $request)
     {
-        $izin = Izin::when(request()->q, function ($query) {
-            $query->where('users.name', 'like', '%' . request()->q . '%');
-        })  ->join('users', 'users.id', '=', 'izins.user_id')
-            ->select('izins.*', 'users.name', 'users.nip')
-            ->latest()
-            ->paginate(5);
+        $tgl_izin = $request->tgl_izin;
+        $user_id = Auth::user()->id;
+        $cek = Izin::where('user_id', $user_id)->where('tgl_izin', $tgl_izin)->count();
+        return $cek;
+    }
 
+    // Handle Izin Admin Panel
+    public function handle(Request $request)
+    {
+        $query = Izin::query();
+        $query->select('izins.id', 'izins.created_at', 'users.name', 'users.nip', 'izins.status', 'izins.status_approved', 'izins.keterangan');
+        $query->join('users', 'izins.user_id', '=', 'users.id');
+        if (!empty($request->mulai) && !empty($request->sampai)) {
+            $query->whereBetween(DB::raw('DATE(izins.created_at)'), [$request->mulai, $request->sampai]);
+        }
+        if (!empty($request->name)) {
+            $query->where('users.name', 'like', '%' . $request->name . '%' );
+        }
+        if (!empty($request->nip)) {
+            $query->where('users.nip', $request->nip);
+        }
+        if (in_array($request->status_approved, ["0", "1", "2"])) {
+            $query->where('izins.status_approved', $request->status_approved);
+        }
+        $query->orderBy('izins.created_at', 'desc');
+        $izin = $query->paginate(5);
+        $izin->appends($request->all());
+    
         return view('admin.izin.handle', compact('izin'));
     }
 
